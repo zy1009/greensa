@@ -20,6 +20,6 @@ class GuestLogin
             return $next($request);
         }
 
-        return redirect('guest')->withErrors('Login dulu bos!');
+        return redirect('glogin')->withErrors('Login dulu bos!');
     }
 }

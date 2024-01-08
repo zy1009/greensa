@@ -17,7 +17,7 @@ class GuestNotLogin
     public function handle(Request $request, Closure $next): Response
     {
         if (Auth::guard('guest')->check()) {
-            return redirect('guestd')->withErrors('Sampean wes login!');
+            return redirect('ghome')->withErrors('Sampean wes login!');
         }
 
         return $next($request);

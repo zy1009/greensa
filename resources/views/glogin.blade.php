@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Login Page</title>
+  <title>Greensa | Login</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -62,14 +62,15 @@
   </style>
 </head>
 <body>
+
+  @include('partials/navbar')
+
   <div class="login-container">
-    @if ($errors->any())
-        @foreach ($errors->all() as $error)
-          {{ $error }}
-        @endforeach
-    @endif
+    @include('partials/error')
       <h2>Login guest</h2>
-      <form action="/guestlogin" method="POST">
+
+    {{-- Login form --}}
+      <form action="/glogin" method="POST">
         @csrf
         <div class="input-group">
           <label for="email">Email:</label>
@@ -81,6 +82,8 @@
         </div>
         <button type="submit">Login</button>
       </form>
+      {{-- Login form --}}
+
     </div>
   </body>
   </html>

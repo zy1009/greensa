@@ -7,15 +7,20 @@ use Illuminate\Support\Facades\Auth;
 
 class GuestController extends Controller
 {
-    public function showloginguest()
-    {
-        return view('guest');
-    }
+    public function showlogin()
+    {return view('glogin');}
 
     public function showhome()
-    {
-        return view('guestd');
-    }
+    {return view('ghome');}
+
+    public function showroom()
+    {return view('groom');}
+
+    public function showtrain()
+    {return view('gtrain');}
+
+    public function showabout()
+    {return view('gabout');}
 
     public function login(Request $request)
     {
@@ -26,7 +31,7 @@ class GuestController extends Controller
 
         if (Auth::guard('guest')->attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->intended('/guestd');
+            return redirect()->intended('/ghome');
         }
 
         return back()->withErrors('Akun salah');
@@ -38,6 +43,6 @@ class GuestController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         
-        return redirect('guest');
+        return redirect('/ghome');
     }
 }

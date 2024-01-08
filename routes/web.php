@@ -4,22 +4,6 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\GuestController;
 
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-
-Route::get('/guest', [GuestController::class, 'showloginguest'])->middleware('guestnotlogin');
-Route::post('/guestlogin', [GuestController::class, 'login']);
-Route::post('/guestlogout', [GuestController::class, 'logout']);
-Route::get('/guestd', [GuestController::class, 'showhome'])->middleware('guestlogin');
-
 
 // Admin
 Route::get('/admin', [AdminController::class, 'showlogin'])->middleware('adminnotlogin');
@@ -30,4 +14,18 @@ Route::get('/adminr', [AdminController::class, 'showregister'])->middleware('adm
 Route::post('/adminregister', [AdminController::class, 'register']);
 
 Route::post('/adminlogout', [AdminController::class, 'logout']);
+
+// Guest
+Route::get('/ghome', [GuestController::class, 'showhome']);
+
+Route::get('/glogin', [GuestController::class, 'showlogin'])->middleware('guestnotlogin');
+Route::post('/glogin', [GuestController::class, 'login']);
+
+Route::get('/groom', [GuestController::class, 'showroom']);
+
+Route::get('/gtrain', [GuestController::class, 'showtrain']);
+
+Route::get('/gabout', [GuestController::class, 'showabout']);
+
+Route::post('/glogout', [GuestController::class, 'logout']);
 
