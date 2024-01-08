@@ -3,64 +3,65 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
-use App\Http\Requests\StoreAdminRequest;
-use App\Http\Requests\UpdateAdminRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function showlogin()
     {
-        //
+        return view('admin');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function showdashboard()
     {
-        //
+        return view('admind');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreAdminRequest $request)
+    public function showregister()
     {
-        //
+        return view('adminr');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Admin $admin)
+    public function login(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        if (Auth::guard('admin')->attempt($validate)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/admind');
+        }
+
+        return back()->withErrors('Akun salah');
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Admin $admin)
+    public function register(Request $request)
     {
-        //
+        $validate = $request->validate([
+            'username' => 'required|min:6|max:255|email',
+            'password' => 'required|min:5|max:255'
+        ]);
+
+        $store = [
+            'username' => $validate['username'],
+            'password' => Hash::make($validate['password']), // Hash the password using bcrypt
+        ];
+        
+        Admin::create($store);
+
+        return view('admin');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateAdminRequest $request, Admin $admin)
+    public function logout(Request $request)
     {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Admin $admin)
-    {
-        //
+        Auth::guard('admin')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
+        return redirect('admin');
     }
 }

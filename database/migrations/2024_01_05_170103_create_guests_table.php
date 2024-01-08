@@ -13,16 +13,8 @@ return new class extends Migration
     {
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
-            $table->string('nama');
-            $table->string('nik')->unique();
-            $table->string('telp');
-            $table->string('alamat');
-            $table->string('kota');
-            $table->string('provinsi');
-            $table->string('negara');
-            $table->string('tl');
-            $table->string('email')->unique();
-            $table->string('pass');
+            $table->string('username');
+            $table->string('password');
             $table->timestamps();
         });
     }

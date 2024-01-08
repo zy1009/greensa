@@ -2,65 +2,42 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Guest;
-use App\Http\Requests\StoreGuestRequest;
-use App\Http\Requests\UpdateGuestRequest;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class GuestController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function showloginguest()
     {
-        //
+        return view('guest');
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function showhome()
     {
-        //
+        return view('guestd');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(StoreGuestRequest $request)
+    public function login(Request $request)
     {
-        //
+        $credentials = $request->validate([
+            'username' => 'required',
+            'password' => 'required'
+        ]);
+
+        if (Auth::guard('guest')->attempt($credentials)) {
+            $request->session()->regenerate();
+            return redirect()->intended('/guestd');
+        }
+
+        return back()->withErrors('Akun salah');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Guest $guest)
+    public function logout(Request $request)
     {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Guest $guest)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(UpdateGuestRequest $request, Guest $guest)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Guest $guest)
-    {
-        //
+        Auth::guard('guest')->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+        
+        return redirect('guest');
     }
 }
