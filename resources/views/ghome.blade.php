@@ -71,10 +71,6 @@
 <div>
   @include('partials/error')
   <h1>user masuk</h1>
-  <form action="/glogout" method="POST">
-      @csrf
-      <button type="submit">Logout</button>
-  </form>
 </div>
 
 </body>

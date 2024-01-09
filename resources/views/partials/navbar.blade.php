@@ -44,6 +44,12 @@
       @endphp
       <div class="right-buttons">
         <li><a href="#gprofile" method="GET">Halo , {{ $username }}!</a></li>
+        <li>
+          <form action="/glogout" method="POST">
+            @csrf
+            <button type="submit">Logout</button>
+          </form>
+        </li>
       </div>
     @endauth
     @guest('guest')
