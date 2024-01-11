@@ -35,27 +35,24 @@
   {{-- Navbar --}}
   <ul>
     <li><a href="/ghome" method="GET">Home</a></li>
-    <li><a href="/groom" method="GET">Rooms</a></li>
     <li><a href="/gtrain" method="GET">Training Center</a></li>
     <li><a href="/gabout" method="GET">About Us</a></li>
     @auth('guest')
       @php
-          $username = session('username');
+          $guest = session('guest');
       @endphp
       <div class="right-buttons">
-        <li><a href="#gprofile" method="GET">Halo , {{ $username }}!</a></li>
-        <li>
-          <form action="/glogout" method="POST">
-            @csrf
-            <button type="submit">Logout</button>
-          </form>
-        </li>
+        <li><a href="#gprofile" method="GET">Halo , {{ $guest->username }}!</a></li>
+        <form action="/glogout" method="POST">
+          @csrf
+          <button type="submit">Logout</button>
+        </form>
       </div>
     @endauth
     @guest('guest')
       <div class="right-buttons">
         <li><a href="/glogin" method="GET">Login</a></li>
-        <li><a href="/ghome" method="GET">Register</a></li>
+        <li><a href="/gregister" method="GET">Register</a></li>
       </div>
     @endguest
   </ul>

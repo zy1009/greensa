@@ -70,7 +70,8 @@
 
 <div>
   @include('partials/error')
-  <h1>user masuk</h1>
+  <h1>Searching</h1>
+  @include('partials/search')
 </div>
 
 </body>

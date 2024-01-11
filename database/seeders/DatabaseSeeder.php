@@ -5,6 +5,7 @@ namespace Database\Seeders;
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use App\Models\Admin;
 use App\Models\Guest;
+use App\Models\Train;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -14,8 +15,6 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // \App\Models\User::factory(10)->create();
-
         Admin::create([
             'username' => 'admin@mail.com',
             'password' => bcrypt('123')
@@ -26,9 +25,20 @@ class DatabaseSeeder extends Seeder
             'password' => bcrypt('123')
         ]);
 
-        // \App\Models\User::factory()->create([
-        //     'name' => 'Test User',
-        //     'email' => 'test@example.com',
-        // ]);
+        Train::create([
+            'nama' => 'room 1',
+            'lantai' => 1,
+            'kapasitas' => 100,
+            'harga' => 1000,
+            'deskripsi' => "Ini adalah deskripsi room 1. Ini adalah deskripsi room 1. Ini adalah deskripsi room 1. Ini adalah deskripsi room 1. Ini adalah deskripsi room 1.",
+        ]);
+
+        Train::create([
+            'nama' => 'room 2',
+            'lantai' => 2,
+            'kapasitas' => 200,
+            'harga' => 2000,
+            'deskripsi' => "Ini adalah deskripsi room. Ini adalah deskripsi room. Ini adalah deskripsi room. Ini adalah deskripsi room. Ini adalah deskripsi room.",
+        ]);
     }
 }
