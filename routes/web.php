@@ -6,14 +6,12 @@ use App\Http\Controllers\GuestController;
 
 
 // Admin
-Route::get('/admin', [AdminController::class, 'showlogin'])->middleware('adminnotlogin');
-Route::post('/adminlogin', [AdminController::class, 'login']);
-Route::get('/admind', [AdminController::class, 'showdashboard'])->middleware('adminlogin');
+Route::get('/alogin', [AdminController::class, 'showlogin'])->middleware('adminnotlogin');
+Route::post('/alogin', [AdminController::class, 'login']);
 
-Route::get('/adminr', [AdminController::class, 'showregister'])->middleware('adminnotlogin');
-Route::post('/adminregister', [AdminController::class, 'register']);
+Route::get('/adash', [AdminController::class, 'showdashboard'])->middleware('adminlogin');
 
-Route::post('/adminlogout', [AdminController::class, 'logout']);
+Route::post('/alogout', [AdminController::class, 'logout']);
 
 // Guest
 Route::get('/ghome', [GuestController::class, 'showhome']);

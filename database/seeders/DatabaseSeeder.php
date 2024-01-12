@@ -16,8 +16,8 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Admin::create([
-            'username' => 'admin@mail.com',
-            'password' => bcrypt('123')
+            'username' => 'a@a',
+            'password' => bcrypt('1')
         ]);
 
         Guest::create([

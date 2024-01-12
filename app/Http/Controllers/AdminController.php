@@ -11,17 +11,12 @@ class AdminController extends Controller
 {
     public function showlogin()
     {
-        return view('admin');
+        return view('alogin');
     }
 
     public function showdashboard()
     {
-        return view('admind');
-    }
-
-    public function showregister()
-    {
-        return view('adminr');
+        return view('adash');
     }
 
     public function login(Request $request)
@@ -33,27 +28,10 @@ class AdminController extends Controller
 
         if (Auth::guard('admin')->attempt($validate)) {
             $request->session()->regenerate();
-            return redirect()->intended('/admind');
+            return redirect()->intended('/adash');
         }
 
         return back()->withErrors('Akun salah');
-    }
-
-    public function register(Request $request)
-    {
-        $validate = $request->validate([
-            'username' => 'required|min:6|max:255|email',
-            'password' => 'required|min:5|max:255'
-        ]);
-
-        $store = [
-            'username' => $validate['username'],
-            'password' => Hash::make($validate['password']), // Hash the password using bcrypt
-        ];
-        
-        Admin::create($store);
-
-        return view('admin');
     }
 
     public function logout(Request $request)
@@ -62,6 +40,6 @@ class AdminController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
         
-        return redirect('admin');
+        return redirect('alogin');
     }
 }

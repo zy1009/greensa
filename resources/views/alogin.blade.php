@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Register</title>
+  <title>Login Page</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -70,8 +70,8 @@
         {{ $error }}
       @endforeach
   @endif
-    <h2>Register</h2>
-    <form action="/adminregister" method="POST">
+    <h2>Login</h2>
+    <form action="/alogin" method="POST">
       @csrf
       <div class="input-group">
         <label for="email">Email:</label>
@@ -81,7 +81,7 @@
         <label for="password">Password:</label>
         <input type="password" name="password" required>
       </div>
-      <button type="submit">Daftar</button>
+      <button type="submit">Login</button>
     </form>
   </div>
 </body>
