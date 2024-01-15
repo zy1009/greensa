@@ -14,8 +14,10 @@ return new class extends Migration
         Schema::create('guests', function (Blueprint $table) {
             $table->id();
             $table->string('username');
+            $table->string('email');
             $table->string('password');
             $table->timestamps();
+            $table->timestamp('email_verified_at')->nullable();
         });
     }
 

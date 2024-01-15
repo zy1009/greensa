@@ -16,13 +16,14 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         Admin::create([
-            'username' => 'a@a',
+            'username' => 'admin@mail',
             'password' => bcrypt('1')
         ]);
 
         Guest::create([
-            'username' => 'guest@mail.com',
-            'password' => bcrypt('123')
+            'username' => 'anon@mail',
+            'email' => 'anon@mail',
+            'password' => bcrypt('1')
         ]);
 
         Train::create([

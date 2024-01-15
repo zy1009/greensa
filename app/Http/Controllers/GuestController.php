@@ -6,6 +6,7 @@ use App\Models\Guest;
 use App\Models\Train;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Auth\Events\Registered;
 
 class GuestController extends Controller
 {
@@ -64,11 +65,21 @@ class GuestController extends Controller
             'password' => 'required'
         ]);
     
-        Guest::create([
+        $guest = Guest::create([
             'username' => $credentials['username'],
+            'email' => $credentials['username'],
             'password' => bcrypt($credentials['password'])
         ]);
 
-        return redirect('/ghome')->withErrors('Account Created !!!');
+        // kirim email
+        event(new Registered($guest));
+
+        // login
+        Auth::guard('guest')->login($guest);
+
+        // redirect
+        $request->session()->regenerate();
+        $request->session()->put('guest', $guest);
+        return redirect('/email/verify');
     }
 }
